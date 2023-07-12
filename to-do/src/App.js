@@ -33,7 +33,13 @@ function App() {
   };
   return (
     <div className="App">
-      
+      <div className="container">
+        <h1 className='text-center mb-4'>Todo</h1>
+        <FormTodo addTodo={addTodo} />
+        <div>
+          
+        </div>
+      </div>
     </div>
   );
 }
