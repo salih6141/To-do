@@ -1,15 +1,23 @@
 import logo from './logo.svg';
 import './App.css';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Button, Card, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import autoAnimate from '@formkit/auto-animate'
+
 
 function Todo({todo, index, doneTodo, deleteTodo}) {
+  const parentRef = useRef();
+  useEffect(() => {
+    if (parentRef.current) {
+      autoAnimate(parentRef.current);
+    }
+  }, [parentRef]);
   return(
     <div className='todo'>
       <span style={{ textDecoration: todo.isDone ? "line-through": ""}}>{todo.text}</span>
-      <div>
-        <Button variant="outline-succes" onClick={() => doneTodo(index)}>√</Button>{''}
+      <div ref={parentRef}>
+        <Button variant="outline-succes" ref={parentRef} onClick={() => doneTodo(index)}>√</Button>{''}
         <Button variant="outline-danger" onClick={() => deleteTodo(index)}>x</Button>
       </div>
     </div>
@@ -32,7 +40,7 @@ function FormTodo({ addTodo }) {
         <Form.Label><b>Add Todo</b></Form.Label>
         <Form.Control type='text' className='input' value={value} onChange={e => setValue(e.target.value)} placeholder='Add new item' />
       </Form.Group>
-      <Button variant='primary mb-3' type='submit'>
+      <Button className='textcapitalize' variant='success' type='submit'>
         Submit
       </Button>
     </Form>
@@ -40,6 +48,13 @@ function FormTodo({ addTodo }) {
 }
 
 function App() {
+  const parentRef = useRef();
+  useEffect(() => {
+    if (parentRef.current) {
+      autoAnimate(parentRef.current);
+    }
+  }, [parentRef]);
+
   const [todos, setTodos] = React.useState([ //defining a javascript todo list wich will contain the todos
     {
       text: "test ToDo",
@@ -71,7 +86,7 @@ function App() {
       <div className="container">
         <h1 className='text-center mb-4'>Todo</h1>
         <FormTodo addTodo={addTodo} />
-        <div>
+        <div ref={parentRef}>
           {todos.map((todo, index) => (
             <Card>
               <Card.Body>

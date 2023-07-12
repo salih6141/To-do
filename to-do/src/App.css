@@ -1,5 +1,11 @@
+.App{
+  background-image: url(../public/to-do-list.svg);
+  background-size: 100;
+  background-repeat: no-repeat;
+}
+
 .App {
-  padding: 25px;
+  padding: 30px;
   background-color: whitesmoke;
   text-align: center;
 }
